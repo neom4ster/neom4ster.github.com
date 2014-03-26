@@ -1,0 +1,61 @@
+application: octopressprueba
+version: 3
+runtime: python27
+api_version: 1
+threadsafe: true
+
+default_expiration: "15m" 
+
+handlers: 
+- url: /themes
+  static_dir: themes
+  
+- url: /theme
+  static_dir: theme 
+
+- url: /
+  static_files: index.html
+  upload: index.html
+
+- url: /categoria/(.*)/
+  static_files: categoria/\1/index.html
+  upload: categoria/(.*)/index.html
+  
+- url: /etiqueta/(.*)/
+  static_files: etiqueta/\1/index.html
+  upload: etiqueta/(.*)/index.html   
+  
+- url: /2013/(.*)/(.*)/(.*)/
+  static_files: 2013/\1/\2/\3/index.html
+  upload: 2013/(.*)/(.*)/(.*)/index.html 
+ 
+- url: /2013/(.*)/
+  static_files: 2013/\1/index.html
+  upload: 2013/(.*)/index.html 
+
+- url: /feed|/feed/
+  static_files: feed/index.html
+  upload: feed/index.html
+  
+- url: /contacto|/contacto/
+  static_files: contacto/index.html
+  upload: contacto/index.html 
+  
+- url: /buscar|/buscar/
+  static_files: buscar/index.html
+  upload: buscar/index.html   
+
+- url: /acerca|/acerca/
+  static_files: acerca/index.html
+  upload: acerca/index.html
+
+- url: /pagina/(.*)/
+  static_files: pagina/\1/index.html
+  upload: pagina/(.*)/index.html  
+ 
+- url: /categoria/(.*)|/etiqueta/(.*)|/2013/(.*)/(.*)/(.*)
+  script: slash.app
+
+- url: /[^.]*[^/]
+  static_files: 404.html
+  upload: 404.html  
